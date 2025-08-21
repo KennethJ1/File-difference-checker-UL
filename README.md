@@ -21,7 +21,21 @@ Quick start
 
 Packaging
 
-- Use `pyinstaller difference_checker.spec` to build an installer-ready folder (see `difference_checker.spec`).
+- Use the included PowerShell helper to build a Windows single-folder app using PyInstaller:
+
+   ```powershell
+   # from project root
+   .\tools\build_windows.ps1
+   # or to force a clean build
+   .\tools\build_windows.ps1 -Clean
+   ```
+
+- Under the hood the script creates a temporary virtualenv, installs requirements, runs `pyinstaller` with
+   `difference_checker.spec` and copies the `dist\difference_checker` folder to `artifacts\` with a timestamp.
+
+- Troubleshooting PySide6 plugin errors: if the packaged app fails to start due to missing Qt plugins, verify
+   the `PySide6/plugins/platforms` folder is present inside the `dist\difference_checker` folder. If missing,
+   add an explicit `datas` entry to `difference_checker.spec` pointing to your local site-packages PySide6 plugins.
 
 Logs
 

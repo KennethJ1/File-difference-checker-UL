@@ -37,6 +37,9 @@ tmp/
 # Test samples (ignore large/example files used for local testing)
 test_samples/
 
+# Build artifacts
+artifacts/
+
 # PySide6 and Qt plugin caches
 QtWebEngineProcess*
 
