@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+.venv/
+venv/
+venv.bak/
+ENV/
+env.bak/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+pip-wheel-metadata/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Logs and temp
+logs/
+*.log
+tmp/
+*.tmp
+
+# Test samples (ignore large/example files used for local testing)
+test_samples/
+
+# PySide6 and Qt plugin caches
+QtWebEngineProcess*
+
+# Windows
+Thumbs.db
+
+# JetBrains
+.idea/
