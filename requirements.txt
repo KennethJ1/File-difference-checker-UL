@@ -1,3 +1,4 @@
+
 PySide6
 openpyxl
 Pillow
@@ -5,4 +6,3 @@ PyMuPDF
 reportlab
 scikit-image
 numpy
-pyinstaller

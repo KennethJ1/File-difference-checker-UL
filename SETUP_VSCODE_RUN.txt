@@ -1,0 +1,107 @@
+Goal: Install Python + pip (if needed), create a venv, install project dependencies, and run the Difference Checker GUI from VS Code on a fresh Windows machine.
+
+Prerequisites
+- Windows 10/11 with internet access
+- User account (no admin required for per-user installs)
+- VS Code installed (recommended)
+- Files to send: the project folder containing `src/` and `requirements.txt` (optionally include `compare_cli.py`, `run_cli.bat`, `README_CLI.md`)
+
+Quick checklist (summary)
+1) Verify Python exists. If not, install Python (winget recommended).  
+2) Create a virtual environment (.venv) inside the project folder.  
+3) Use the venv python to upgrade pip and install `requirements.txt`.  
+4) Run the GUI via the venv python (no PowerShell activation required).
+
+Detailed commands (PowerShell) — run from the project root where `requirements.txt` and `src/` live
+
+STEP A — Quick check: does Python already exist?
+
+```
+python --version
+# or if python not found
+py -3 --version
+```
+
+If either shows a Python version (3.8+), skip to STEP C. If not, follow STEP B to install Python.
+
+STEP B — Install Python (choose one method)
+
+Option B1 (recommended when available): winget (one command)
+
+```
+# install latest official Python 3 via winget (accept agreements)
+winget install --id=Python.Python.3 -e --accept-package-agreements --accept-source-agreements
+
+# verify
+python --version
+python -m pip --version
+```
+
+Run Difference Checker locally (no virtual environment)
+
+This file shows the minimal steps to install Python (if needed), install the project dependencies for the current user, and run the GUI directly from the project root.
+
+Prerequisites
+- Windows 10/11
+- Internet access to download Python and packages
+- Project folder with `src/` and `requirements.txt` on a local drive (do not run from OneDrive)
+
+Quick usage
+- You can run the manual commands below, or double-click `run_setup.bat` from the project root to attempt the same steps automatically.
+
+Manual steps (PowerShell)
+
+1) Check for Python
+
+```
+python --version
+# or if python not found
+py -3 --version
+```
+
+2) If Python is missing, try installing with winget (recommended) or install the per-user installer from python.org
+
+Winget (recommended):
+
+```
+winget install --id=Python.Python.3 -e --accept-package-agreements --accept-source-agreements
+```
+
+Per-user installer (example, run only if winget is not available):
+
+```
+$installer = 'python-installer.exe'
+Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/3.11.5/python-3.11.5-amd64.exe' -OutFile $installer
+Start-Process -FilePath $installer -ArgumentList '/quiet InstallAllUsers=0 PrependPath=1 Include_pip=1' -Wait
+```
+
+3) Install project dependencies for the current user (no admin)
+
+Run from the project root:
+
+```
+python -m pip install --user --upgrade pip setuptools wheel
+python -m pip install --user -r requirements.txt
+```
+
+4) Run the GUI
+
+From the project root:
+
+```
+python -u src\gui\app_window.py
+```
+
+Optional quick CLI test:
+
+```
+python compare_cli.py "test_samples\NS003_HW_3_A.xlsx" "test_samples\NS003_HW_4.0_A.xlsx" excel
+```
+
+If you prefer automation, run `run_setup.bat` from the project root (it will try winget if Python is missing, then run the pip install commands). If the batch cannot install Python automatically it will advise the manual installer option.
+
+Troubleshooting
+- If `python` is not found after installing, open a new terminal window.  
+- If `pip install` fails for binary packages (numpy, scikit-image), ensure pip is up-to-date; pip usually downloads Windows wheels.  
+- Do not run the project from OneDrive or a network share.  
+
